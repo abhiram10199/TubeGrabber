@@ -4,47 +4,38 @@ from pytube import YouTube
 def decorationPrints():
     print("------------------------------------------------------")
 
-'''
-class DownloadType:
 
-    def __init__(self, type="Highest Resolution"):
-        self.type = type
+class ReadURLs():
+    def __init__(self):
+        self.urls = []
 
-    def normalType():
-        ...        
+    # Read URLs from existing file
+    def readURLs(self):
+        with open("urls.txt", 'r') as file:
+            urls = file.readlines()
+        
+        return urls
+    
 
-def getItag():
-    ##############################################
-    this function if implemented will use the terminal to choose which specific 
-    file to download from a list of given sources.
-    displayed as:
-        'itag: <Stream: itag="124" ...>'
-    ##############################################
+class VideoType():
+    ...
 
-'''
-
-
-def userInputs():
-    # Promt the user to choose XXXXXXX
+def videoType():
+    # Promt the user to choose one of the following options
     print("""Choose one of the following numbers to specifiy the type of file to download
 1. (NOT IMPLEMENTED) Audio Only
 2. Adaptive (Audio & Video split) [Highest Resolution]
 3. (NOT IMPLEMENTED) Progressive (Audio & Video in 1 file) [NOT HIGHEST QUALITY]""")
     
     downloadType = input("Number: ")
+
     decorationPrints()
 
-    # Prompt user for URLs and store them in a list
-    while True:
-        url = input("Enter YouTube URL (or 'done' to finish): ")
-        if url.lower() == "done":
-            break
-        urls.append(url)
 
-
+# Gets the path for the download folder
 def getFolderPath():
     downloadFolderPath = input("Enter download folder path: ").strip('"')
-    print(f'DOWNLOAD PATH {downloadFolderPath}')
+    print(f'DOWNLOAD PATH: {downloadFolderPath}')
     decorationPrints()
     return downloadFolderPath
 
@@ -55,7 +46,7 @@ def getFolderPath():
 def downloadVideo(link: str, downloadPath: str): 
     video =  YouTube(link).streams.get_highest_resolution()
    
-    try: 
+    try:
         video.download(downloadPath)
     except:
         print("Error!!")
@@ -63,16 +54,17 @@ def downloadVideo(link: str, downloadPath: str):
 
 # MAIN METHOD
 def main():
-    global urls
-    urls = []
 
     decorationPrints()
-    userInputs()
+    videoType()
     decorationPrints()
     
     # Ask user to select download folder
     downloadFolderPath = getFolderPath()
     
+    # Read URLs from file
+    urls = ReadURLs().readURLs()
+
     # Iterate through list of URLs and download each
     for url in urls:
         downloadVideo(url, downloadFolderPath)
