@@ -13,38 +13,54 @@ class ReadURLs():
     def readURLs(self):
         with open("urls.txt", 'r') as file:
             urls = file.readlines()
-        
         return urls
-    
+
 
 class VideoType():
-    ...
+    def __init__(self):
+        pass
 
-def videoType():
     # Promt the user to choose one of the following options
-    print("""Choose one of the following numbers to specifiy the type of file to download
-1. (NOT IMPLEMENTED) Audio Only
-2. Adaptive (Audio & Video split) [Highest Resolution]
-3. (NOT IMPLEMENTED) Progressive (Audio & Video in 1 file) [NOT HIGHEST QUALITY]""")
-    
-    downloadType = input("Number: ")
+    def chooseType(self):
+        print("Choose one of the following numbers to specifiy the type of file to download\n1. (NOT IMPLEMENTED) Audio Only\n2. Adaptive (Audio & Video split) [Highest Resolution]\n3. (NOT IMPLEMENTED) Progressive (Audio & Video in 1 file) [NOT HIGHEST QUALITY]")
+        self.type = input("Number: ")
+        decorationPrints()
 
-    decorationPrints()
+    def getType(self):
+        return self.type
 
+
+# Get only the sources that match with chosen type
+class VideoFilter(type):
+    def __init__(self, type, link):
+        self.type = type
+
+    def filter(self):
+        if type == 1:
+            return YouTube().streams.filter(only_audio=True)
+        elif type == 2:
+            return YouTube().streams.filter(only_video=True)
+        elif type == 3:
+            return YouTube().streams.filter(progressive=True)
+        else:
+            print("Invalid choice!!")
+            return None
+
+
+class Downloader():
+    ...
 
 # Gets the path for the download folder
 def getFolderPath():
     downloadFolderPath = input("Enter download folder path: ").strip('"')
-    print(f'DOWNLOAD PATH: {downloadFolderPath}')
+    print(f'The DOWNLOAD PATH is: {downloadFolderPath}')
     decorationPrints()
     return downloadFolderPath
 
 
 # Downloads the video!
-# To add choice, add an extra argument and if-else statements to 
-# change the last method
 def downloadVideo(link: str, downloadPath: str): 
-    video =  YouTube(link).streams.get_highest_resolution()
+    # video =  YouTube(link).streams.get_highest_resolution()
    
     try:
         video.download(downloadPath)
@@ -56,7 +72,7 @@ def downloadVideo(link: str, downloadPath: str):
 def main():
 
     decorationPrints()
-    videoType()
+    # videoType()
     decorationPrints()
     
     # Ask user to select download folder
