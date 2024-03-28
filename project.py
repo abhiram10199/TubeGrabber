@@ -39,7 +39,6 @@ class VideoType:
         print("4. 1080p")
         print("5. 720p")
         self.type = int(input("Enter the number: "))
-        print_decorative_lines()
 
     # Validate the type of video chosen by the user
     # Raises TypeNotInRangeException if the type is not in the range of 1-5 
@@ -74,7 +73,6 @@ def filter(video_type, link):
 def get_folder_path():
     download_folder_path = input("Enter download folder path: ").strip('"')
     print(f'The DOWNLOAD PATH is: {download_folder_path}')
-    print_decorative_lines()
     return download_folder_path
 
 # Function to download the video
@@ -91,8 +89,6 @@ def download_video(url, video_type, download_folder_path):
             print(f"No suitable source found for URL: {url.strip()}")
     except Exception:
         print(f"Error downloading video from URL: {url.strip()}")
-    print("ALL VIDEOS DOWNLOADED!!")
-    print_decorative_lines()
 
 
 # MAIN METHOD
@@ -120,6 +116,8 @@ def main():
     for thread in threads:
         thread.join()
 
+    print("ALL VIDEOS DOWNLOADED!!")
+    
 
 if __name__ == '__main__':
     main()
