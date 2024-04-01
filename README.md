@@ -15,6 +15,7 @@ This is a Python script for downloading YouTube videos using the Pytube library.
 
 - Python 3.x
 - Pytube library
+- Threading library
 
 ## Installation
 
