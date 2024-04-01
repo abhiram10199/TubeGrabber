@@ -55,10 +55,6 @@ This is a Python script for downloading YouTube videos using the Pytube library.
 - `urls.txt`: List of URLs to be downloaded.
 - `requirements.txt`: List of required Python packages.
 
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request with any improvements or bug fixes.
-
 ## Acknowledgments
 
 Special thanks to the developers of Pytube for creating such a useful library for working with YouTube videos.
